@@ -1,4 +1,5 @@
 import javax.swing.*;
+import javax.swing.border.Border;
 import java.awt.*;
 
 public class Main{
@@ -8,11 +9,18 @@ public class Main{
     private static JButton submit, back;
 
     public static void main(String[] args){
+        try {
+            UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
         ManagerFunctions functions = new ManagerFunctions();
         CommonItems items = new CommonItems();
 
         mainFrame = new JFrame("Student and Course Manager");
         mainFrame.setSize(400,400);
+        mainFrame.setResizable(false);
         mainFrame.setLocationRelativeTo(null);
         mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         mainFrame.setVisible(true);
@@ -21,6 +29,9 @@ public class Main{
         JLabel mainTitle = new JLabel("Student and Course Manager");
         mainTitle.setFont(new Font("Sans Serif", Font.BOLD, 20));
         mainPanel.add(mainTitle);
+
+        mainPanel.setLayout(new GridLayout(0,2, 20, 20));
+        mainPanel.setBorder(BorderFactory.createEmptyBorder(50, 100, 100, 100));
 
         JButton createProgButton = new JButton("Create Program Course");
         mainPanel.add(createProgButton);
@@ -74,9 +85,11 @@ public class Main{
             submit = functions.submitAddCourse(courseName, courseCode, courseCapacity, labSubjOpt, optionPanel, mainPanel);
             submit.setBounds(70,250, 125, 30);
             optionPanel.add(submit);
+            optionPanel.setComponentZOrder(submit, 0);
 
             back = items.makeBackButton("Back", optionPanel, mainPanel, 200, 250, 125, 30);
             optionPanel.add(back);
+            optionPanel.setComponentZOrder(back, 0);
 
             mainPanel.setVisible(false);
             optionPanel.setVisible(true);
@@ -381,10 +394,9 @@ public class Main{
         });
 
         JButton exitProgramButton = new JButton("Exit Program");
-        mainPanel.add(exitProgramButton);
+        exitProgramButton.setInsets(new Insets(10, 10, 10, 10)); // Adjust padding
+        mainPanel.add(exitProgramButton, 0, 1);
         exitProgramButton.addActionListener(e -> System.exit(0));
-
-        mainPanel.setLayout(new BoxLayout(mainPanel, BoxLayout.PAGE_AXIS));
 
         mainFrame.add(mainPanel);
         mainFrame.setVisible(true);

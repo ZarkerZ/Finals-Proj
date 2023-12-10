@@ -4,7 +4,7 @@ import java.awt.*;
 
 public class Main{
     private static JFrame mainFrame;
-    private static JPanel mainPanel, optionPanel, subPanel, bottomPanel, spacerPanel;
+    private static JPanel mainPanel, optionPanel, subPanel, bottomPanel, titlePanel;
     private static JLabel optionTitle;
     private static JButton submit, back;
 
@@ -19,21 +19,22 @@ public class Main{
         CommonItems items = new CommonItems();
 
         mainFrame = new JFrame("Student and Course Manager");
-        mainFrame.setSize(400,400);
-        mainFrame.setResizable(true);
+        mainFrame.setSize(800,500);
+        mainFrame.setResizable(false);
         mainFrame.setLocationRelativeTo(null);
         mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         mainFrame.setVisible(true);
         mainPanel = new JPanel();
-        spacerPanel = new JPanel();
         bottomPanel = new JPanel();
+        titlePanel = new JPanel();
 
         JLabel mainTitle = new JLabel("Student and Course Manager");
         mainTitle.setFont(new Font("Sans Serif", Font.BOLD, 20));
-        mainPanel.add(mainTitle);
+        titlePanel.add(mainTitle);
 
         mainPanel.setLayout(new GridLayout(0,2, 20, 10));
         mainPanel.setBorder(BorderFactory.createEmptyBorder(50, 100, 100, 100));
+
 
         JButton createProgButton = new JButton("Create Program Course");
         mainPanel.add(createProgButton);
@@ -42,35 +43,35 @@ public class Main{
             optionPanel.setLayout(null);
             mainFrame.add(optionPanel);
 
-            optionTitle = items.makeOptionTitle("Create Program Course", 115, 20, 300, 30);
+            optionTitle = items.makeOptionTitle("Create Program Course", 275, 20, 300, 30);
             optionPanel.add(optionTitle);
 
-            JLabel courseNameLBL = items.makeFieldLabel("Course Name: ", 70, 70, 300, 80);
+            JLabel courseNameLBL = items.makeFieldLabel("Course Name: ", 230, 70, 300, 80);
             optionPanel.add(courseNameLBL);
 
             JTextField courseName = new JTextField();
-            courseName.setBounds(180, 100, 160, 25);
+            courseName.setBounds(350, 100, 160, 25);
             optionPanel.add(courseName);
 
-            JLabel courseCodeLBL = items.makeFieldLabel("Course Code: ",70, 110, 300, 80);
+            JLabel courseCodeLBL = items.makeFieldLabel("Course Code: ",230, 110, 300, 80);
             optionPanel.add(courseCodeLBL);
 
             JTextField courseCode = new JTextField();
-            courseCode.setBounds(180, 140, 160, 25);
+            courseCode.setBounds(350, 140, 160, 25);
             optionPanel.add(courseCode);
 
-            JLabel courseCapacityLBL = items.makeFieldLabel("Course Capacity (40 max): ",70, 150, 300, 80);
+            JLabel courseCapacityLBL = items.makeFieldLabel("Course Capacity:",230, 150, 300, 80);
             optionPanel.add(courseCapacityLBL);
 
             JTextField courseCapacity = new JTextField();
-            courseCapacity.setBounds(180, 180, 160, 25);
+            courseCapacity.setBounds(350, 180, 160, 25);
             optionPanel.add(courseCapacity);
 
-            JLabel labSubjLBL = items.makeFieldLabel("Has Lab Hours: ", 70, 190, 300, 80);
+            JLabel labSubjLBL = items.makeFieldLabel("Has Lab Hours: ", 230, 190, 300, 80);
             optionPanel.add(labSubjLBL);
 
             JPanel labSubjBTN = new JPanel();
-            labSubjBTN.setBounds(75, 215, 300, 80);
+            labSubjBTN.setBounds(245, 215, 300, 80);
             JRadioButton yesOpt = new JRadioButton("Yes");
             yesOpt.setActionCommand("Yes");
             JRadioButton noOpt = new JRadioButton("No");
@@ -85,16 +86,15 @@ public class Main{
             labSubjBTN.setVisible(true);
 
             submit = functions.submitAddCourse(courseName, courseCode, courseCapacity, labSubjOpt, optionPanel, mainPanel);
-            submit.setBounds(70,250, 125, 30);
+            submit.setBounds(250,250, 125, 30);
             optionPanel.add(submit);
             optionPanel.setComponentZOrder(submit, 0);
 
-            back = items.makeBackButton("Back", optionPanel, mainPanel, 200, 250, 125, 30);
+            back = items.makeBackButton("Back", optionPanel, mainPanel, 400, 250, 125, 30);
             optionPanel.add(back);
             optionPanel.setComponentZOrder(back, 0);
 
             mainPanel.setVisible(false);
-            bottomPanel.setVisible(false);
             optionPanel.setVisible(true);
         });
 
@@ -105,25 +105,24 @@ public class Main{
             optionPanel.setLayout(null);
             mainFrame.add(optionPanel);
 
-            optionTitle = items.makeOptionTitle("Remove Program Course", 115, 20, 300, 30);
+            optionTitle = items.makeOptionTitle("Remove Program Course", 275, 20, 300, 30);
             optionPanel.add(optionTitle);
 
-            JLabel courseCodeLBL = items.makeFieldLabel("Enter Course Code: ", 50, 70, 300, 80);
+            JLabel courseCodeLBL = items.makeFieldLabel("Enter Course Code: ", 230, 120, 300, 80);
             optionPanel.add(courseCodeLBL);
 
             JTextField courseCode = new JTextField();
-            courseCode.setBounds(180, 100, 160, 25);
+            courseCode.setBounds(350, 150, 160, 25);
             optionPanel.add(courseCode);
 
             submit = new JButton("Submit");
-            submit.setBounds(70,230, 125, 30);
+            submit.setBounds(250,230, 125, 30);
             optionPanel.add(submit);
 
-            back = items.makeBackButton("Back",optionPanel,mainPanel,200, 230, 125, 30);
+            back = items.makeBackButton("Back",optionPanel,mainPanel,400, 230, 125, 30);
             optionPanel.add(back);
 
             mainPanel.setVisible(false);
-            bottomPanel.setVisible(false);
             optionPanel.setVisible(true);
 
             submit.addActionListener(e1 ->{
@@ -132,18 +131,17 @@ public class Main{
                 mainFrame.add(subPanel);
 
                 JButton removeCourseBTN = functions.removeProgramCourse(courseCode);
-                removeCourseBTN.setBounds(90,80, 220, 30);
+                removeCourseBTN.setBounds(280,120, 220, 30);
                 subPanel.add(removeCourseBTN);
 
                 JButton removeFromCourseBTN = new JButton("Remove From Program Course");
-                removeFromCourseBTN.setBounds(90,120, 220, 30);
+                removeFromCourseBTN.setBounds(280,160, 220, 30);
                 subPanel.add(removeFromCourseBTN);
 
-                JButton subBack = items.makeBackButton("Back",subPanel,optionPanel,200, 230, 125, 30);
+                JButton subBack = items.makeBackButton("Back",subPanel,optionPanel,325, 230, 125, 30);
                 subPanel.add(subBack);
 
                 optionPanel.setVisible(false);
-                bottomPanel.setVisible(false);
                 subPanel.setVisible(true);
             });
         });
@@ -170,14 +168,12 @@ public class Main{
             optionPanel.add(back);
 
             mainPanel.setVisible(false);
-            bottomPanel.setVisible(false);
             optionPanel.setVisible(true);
         });
 
         JButton addStudentButton = new JButton("Add Student");
         mainPanel.add(addStudentButton);
         addStudentButton.addActionListener(e -> {
-            mainFrame.setSize(400, 550);
             optionPanel = new JPanel();
             optionPanel.setLayout(null);
             mainFrame.add(optionPanel);
@@ -253,15 +249,15 @@ public class Main{
             submit = functions.submitAddStudent(firstName, lastName, idNum, addr, progEnrolled, yearLVL, optionPanel, mainPanel);
             submit.setBounds(70,330, 125, 30);
             optionPanel.add(submit);
+            optionPanel.setComponentZOrder(submit, 0);
+
 
             back = items.makeBackButton("Back", optionPanel,mainPanel,200, 330, 125, 30);
             optionPanel.add(back);
+            optionPanel.setComponentZOrder(back, 0);
 
             mainPanel.setVisible(false);
-            bottomPanel.setVisible(false);
             optionPanel.setVisible(true);
-
-            back.addActionListener(e1 -> mainFrame.setSize(400,400));
         });
 
         JButton removeStudentButton = new JButton("Remove Student");
@@ -289,7 +285,6 @@ public class Main{
             optionPanel.add(back);
 
             mainPanel.setVisible(false);
-            bottomPanel.setVisible(false);
             optionPanel.setVisible(true);
 
             submit.addActionListener(e1->{
@@ -309,7 +304,6 @@ public class Main{
                 subPanel.add(subBack);
 
                 optionPanel.setVisible(false);
-                bottomPanel.setVisible(false);
                 subPanel.setVisible(true);
             });
         });
@@ -339,7 +333,6 @@ public class Main{
             optionPanel.add(back);
 
             mainPanel.setVisible(false);
-            bottomPanel.setVisible(false);
             optionPanel.setVisible(true);
         });
 
@@ -375,7 +368,6 @@ public class Main{
             optionPanel.add(back);
 
             mainPanel.setVisible(false);
-            bottomPanel.setVisible(false);
             optionPanel.setVisible(true);
         });
 
@@ -401,7 +393,6 @@ public class Main{
             optionPanel.add(back);
 
             mainPanel.setVisible(false);
-            bottomPanel.setVisible(false);
             optionPanel.setVisible(true);
         });
 
@@ -409,7 +400,8 @@ public class Main{
         bottomPanel.add(exitProgramButton, BorderLayout.SOUTH);
         exitProgramButton.addActionListener(e -> System.exit(0));
 
-        mainFrame.add(mainPanel, BorderLayout.NORTH);
+        mainFrame.add(titlePanel, BorderLayout.NORTH);
+        mainFrame.add(mainPanel, BorderLayout.CENTER);
         mainFrame.add(bottomPanel, BorderLayout.SOUTH);
         mainFrame.setVisible(true);
     }

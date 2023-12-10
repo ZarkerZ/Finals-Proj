@@ -4,7 +4,7 @@ import java.awt.*;
 
 public class Main{
     private static JFrame mainFrame;
-    private static JPanel mainPanel, optionPanel, subPanel;
+    private static JPanel mainPanel, optionPanel, subPanel, bottomPanel, spacerPanel;
     private static JLabel optionTitle;
     private static JButton submit, back;
 
@@ -20,17 +20,19 @@ public class Main{
 
         mainFrame = new JFrame("Student and Course Manager");
         mainFrame.setSize(400,400);
-        mainFrame.setResizable(false);
+        mainFrame.setResizable(true);
         mainFrame.setLocationRelativeTo(null);
         mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         mainFrame.setVisible(true);
         mainPanel = new JPanel();
+        spacerPanel = new JPanel();
+        bottomPanel = new JPanel();
 
         JLabel mainTitle = new JLabel("Student and Course Manager");
         mainTitle.setFont(new Font("Sans Serif", Font.BOLD, 20));
         mainPanel.add(mainTitle);
 
-        mainPanel.setLayout(new GridLayout(0,2, 20, 20));
+        mainPanel.setLayout(new GridLayout(0,2, 20, 10));
         mainPanel.setBorder(BorderFactory.createEmptyBorder(50, 100, 100, 100));
 
         JButton createProgButton = new JButton("Create Program Course");
@@ -92,6 +94,7 @@ public class Main{
             optionPanel.setComponentZOrder(back, 0);
 
             mainPanel.setVisible(false);
+            bottomPanel.setVisible(false);
             optionPanel.setVisible(true);
         });
 
@@ -120,6 +123,7 @@ public class Main{
             optionPanel.add(back);
 
             mainPanel.setVisible(false);
+            bottomPanel.setVisible(false);
             optionPanel.setVisible(true);
 
             submit.addActionListener(e1 ->{
@@ -139,6 +143,7 @@ public class Main{
                 subPanel.add(subBack);
 
                 optionPanel.setVisible(false);
+                bottomPanel.setVisible(false);
                 subPanel.setVisible(true);
             });
         });
@@ -165,6 +170,7 @@ public class Main{
             optionPanel.add(back);
 
             mainPanel.setVisible(false);
+            bottomPanel.setVisible(false);
             optionPanel.setVisible(true);
         });
 
@@ -252,6 +258,7 @@ public class Main{
             optionPanel.add(back);
 
             mainPanel.setVisible(false);
+            bottomPanel.setVisible(false);
             optionPanel.setVisible(true);
 
             back.addActionListener(e1 -> mainFrame.setSize(400,400));
@@ -282,6 +289,7 @@ public class Main{
             optionPanel.add(back);
 
             mainPanel.setVisible(false);
+            bottomPanel.setVisible(false);
             optionPanel.setVisible(true);
 
             submit.addActionListener(e1->{
@@ -301,6 +309,7 @@ public class Main{
                 subPanel.add(subBack);
 
                 optionPanel.setVisible(false);
+                bottomPanel.setVisible(false);
                 subPanel.setVisible(true);
             });
         });
@@ -330,6 +339,7 @@ public class Main{
             optionPanel.add(back);
 
             mainPanel.setVisible(false);
+            bottomPanel.setVisible(false);
             optionPanel.setVisible(true);
         });
 
@@ -365,6 +375,7 @@ public class Main{
             optionPanel.add(back);
 
             mainPanel.setVisible(false);
+            bottomPanel.setVisible(false);
             optionPanel.setVisible(true);
         });
 
@@ -390,15 +401,16 @@ public class Main{
             optionPanel.add(back);
 
             mainPanel.setVisible(false);
+            bottomPanel.setVisible(false);
             optionPanel.setVisible(true);
         });
 
         JButton exitProgramButton = new JButton("Exit Program");
-        exitProgramButton.setInsets(new Insets(10, 10, 10, 10)); // Adjust padding
-        mainPanel.add(exitProgramButton, 0, 1);
+        bottomPanel.add(exitProgramButton, BorderLayout.SOUTH);
         exitProgramButton.addActionListener(e -> System.exit(0));
 
-        mainFrame.add(mainPanel);
+        mainFrame.add(mainPanel, BorderLayout.NORTH);
+        mainFrame.add(bottomPanel, BorderLayout.SOUTH);
         mainFrame.setVisible(true);
     }
 }
